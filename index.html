@@ -135,39 +135,7 @@
       <li>Chatbots con IA para Atención al Cliente</li>
       <li>Inteligencia Artificial en Recursos Humanos</li>
       <li>Análisis de Datos con IA en Excel</li>
-      <li>Enseñanza de Idiomas con IA</li>
-      <li>IA en Logística y Gestión Aduanera</li>
-      <li>Computación con Herramientas IA</li>
-    </ul>
-  </div>
-
-  <div class="course-card">
-    <h2>💅 Área Artesanal & Creatividad con IA</h2>
-    <ul>
-      <li>Diseño Asistido con IA en Peluquería y Maquillaje</li>
-      <li>Moda y Corte con IA: Patrones y Estilos Automatizados</li>
-      <li>Ajedrez con Entrenamiento basado en IA</li>
-      <li>Manualidades y Creatividad Digital con IA</li>
-    </ul>
-  </div>
-
-  <div class="ai-promo-card">
-    <h3>🤖 Asistente IA 24/7</h3>
-    <p>¿Tienes preguntas sobre mensualidades, horarios o contenido?</p>
-    <button onclick="openChatFromCard()" class="btn-gold" style="font-size:16px; padding:10px;">PREGUNTAR A LA IA</button>
-  </div>
-
-  <button onclick="openModal()" class="btn-gold">RESERVAR CUPO</button>
-
-  <a href="https://wa.me/584224006612?text=Hola%20!%20Deseo%20información%20sobre%20los%20cursos%20con%20IA" class="btn-gold whatsapp-btn">
-    RESERVAR POR WHATSAPP
-  </a>
-
-  <blockquote>
-    "Formando profesionales capaces de dominar las herramientas del mañana, con los valores de siempre."
-  </blockquote>
-
-  <div id="modalRegistro">
+      <div id="modalRegistro">
     <div class="modal-box">
       <div style="text-align:right">
         <button onclick="closeModal()" style="background:none; border:none; color:#ffe082; cursor:pointer; font-size:30px;">✕</button>
@@ -262,11 +230,7 @@
     "chatbot": "💬 Chatbots con IA para Atención al Cliente:\n• Módulo 1: Diseño de flujos conversacionales\n• Módulo 2: Integración con WhatsApp y web\n• Módulo 3: Entrenamiento con historial real\n• Módulo 4: Implementación y métricas\nEvaluación: 25% por módulo.",
     "excel": "📊 Análisis de Datos con IA en Excel:\n• Módulo 1: Fórmulas y tablas dinámicas\n• Módulo 2: Power Query + IA\n• Módulo 3: Visualización inteligente\n• Módulo 4: Caso: análisis financiero\nEvaluación: 25% por módulo.",
     "datos": "📊 Análisis de Datos con IA en Excel:\n• Módulo 1: Fórmulas y tablas dinámicas\n• Módulo 2: Power Query + IA\n• Módulo 3: Visualización inteligente\n• Módulo 4: Caso: análisis financiero\nEvaluación: 25% por módulo.",
-    "idioma": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo.",
-    "ingles": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo.",
-    "peluqueria": "💇‍♀️ Diseño Asistido con IA en Peluquería y Maquillaje:\n• Módulo 1: Análisis de rostro con IA\n• Módulo 2: Pruebas virtuales de color y corte\n• Módulo 3: Técnicas profesionales\n• Módulo 4: Portafolio digital\nEvaluación: 25% por módulo.",
-    "moda": "👗 Moda y Corte con IA:\n• Módulo 1: Medidas y patronaje digital\n• Módulo 2: Diseño asistido por IA\n• Módulo 3: Tendencias predictivas\n• Módulo 4: Colección virtual\nEvaluación: 25% por módulo.",
-    "ajedrez": "♟️ Ajedrez con Entrenamiento basado en IA:\n• Módulo 1: Aperturas y tácticas\n• Módulo 2: Análisis con motores IA\n• Módulo 3: Estrategia de medio juego\n• Módulo 4: Torneo virtual\nEvaluación: 25% por módulo."
+    "idioma": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo."
   };
 
   function findCourseInMessage(text) {
@@ -291,19 +255,19 @@
     
     if (!txt) return;
 
-    logs.innerHTML += `<div style="text-align:right; color:#ffe082; margin-top:10px;"><b>Tú:</b> ${escapeHtml(txt)}</div>`;
+    logs.innerHTML += <div style="text-align:right; color:#ffe082; margin-top:10px;"><b>Tú:</b> ${escapeHtml(txt)}</div>;
     input.value = "";
     logs.scrollTop = logs.scrollHeight;
 
     const courseInfo = findCourseInMessage(txt);
     if (courseInfo) {
-      const reply = `📚 ${courseInfo}\n\n✨ Inversión: solo <b>20 $ o 25 €</b> por curso completo con certificado.\n📱 ¿Reservamos tu cupo? Escríbenos al WhatsApp: <b>+58 422 4006612</b>.`;
-      logs.innerHTML += `<div style="margin-top:10px;"><b>IA:</b> ${reply.replace(/\n/g, '<br>')}</div>`;
+      const reply =📚 ${courseInfo}\n\n✨ Inversión: solo <b>20 $ o 25 €</b> por curso completo con certificado.\n📱 ¿Reservamos tu cupo? Escríbenos al WhatsApp: <b>+58 422 4006612</b>.`;
+      logs.innerHTML += <div style="margin-top:10px;"><b>IA:</b> ${reply.replace(/\n/g, '<br>')}</div>;
       logs.scrollTop = logs.scrollHeight;
       return;
     }
 
-    logs.innerHTML += `<div id="loading-msg" style="margin-top:10px; color:#999;"><i>Pensando...</i></div>`;
+    logs.innerHTML += <div id="loading-msg" style="margin-top:10px; color:#999;"><i>Pensando...</i></div>;
     logs.scrollTop = logs.scrollHeight;
 
     try {
@@ -322,7 +286,7 @@
       if (data.error) throw new Error(data.error);
 
       let answer = data.answer || "Lo siento, no pude procesar la respuesta.";
-      logs.innerHTML += `<div style="margin-top:10px;"><b>IA:</b> ${escapeHtml(answer).replace(/\n/g, '<br>')}</div>`;
+      logs.innerHTML += <div style="margin-top:10px;"><b>IA:</b> ${escapeHtml(answer).replace(/\n/g, '<br>')}</div>;
       logs.scrollTop = logs.scrollHeight;
 
     } catch (err) {
@@ -330,7 +294,7 @@
       const loadingMsg = document.getElementById('loading-msg');
       if (loadingMsg) loadingMsg.remove();
       
-      logs.innerHTML += `<div style="color:#ff6b6b; margin-top:10px;"><b>IA:</b> 😔 En este momento el servicio IA está temporalmente no disponible.<br>Por favor contáctanos directamente al WhatsApp: <b>+58 422 4006612</b><br>¡Te atenderemos de inmediato!</div>`;
+      logs.innerHTML += <div style="color:#ff6b6b; margin-top:10px;"><b>IA:</b> 😔 En este momento el servicio IA está temporalmente no disponible.<br>Por favor contáctanos directamente al WhatsApp: <b>+58 422 4006612</b><br>¡Te atenderemos de inmediato!</div>;
       logs.scrollTop = logs.scrollHeight;
     }
   }
