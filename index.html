@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academia Divino Niño Jesús | Formación con IA</title>
+  <title>Academia Divino Niño Jesús | Master en IA aplicada</title>
   <style>
     :root {
       --gold: #ffe082;
@@ -25,20 +25,18 @@
     .main-container { padding: 20px; max-width: 900px; margin: auto; }
 
     header { text-align: center; padding: 50px 20px; border-bottom: 1px solid rgba(255, 224, 130, 0.2); }
-    .logo-maestro { width: 220px; filter: drop-shadow(0 0 10px rgba(255,224,130,0.3)); margin-bottom: 20px; }
+    .logo-maestro { width: 100%; max-width: 280px; filter: drop-shadow(0 0 15px rgba(255,224,130,0.5)); margin-bottom: 20px; }
     h1 { font-size: 2.5rem; background: linear-gradient(90deg, var(--gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 10px 0; }
 
     .course-card {
       background: var(--card-bg); border-radius: 20px; padding: 30px; margin: 30px 0;
       border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
     }
-    .course-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-    h2 { color: var(--gold); margin-top: 0; display: flex; align-items: center; gap: 10px; }
+    h2 { color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 10px; }
     
-    ul { list-style: none; padding: 0; }
-    li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; }
-    li::before { content: "⚡"; margin-right: 15px; color: var(--gold); }
+    .course-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; list-style: none; padding: 0; }
+    li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9em; display: flex; align-items: flex-start; }
+    li::before { content: "🤖"; margin-right: 10px; font-size: 0.8em; }
 
     .btn-gold {
       display: block; width: 100%; max-width: 380px; padding: 20px; margin: 15px auto;
@@ -49,12 +47,12 @@
     .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,224,130,0.4); }
     .whatsapp-btn { background: #25d366; color: white; }
 
-    .cert-section {
-      text-align: center; background: linear-gradient(rgba(255,224,130,0.05), transparent);
-      padding: 40px; border-radius: 20px; border: 1px solid rgba(255,224,130,0.2); margin: 40px 0;
-    }
+    /* TESTIMONIOS */
+    .testimonials-container { margin: 40px 0; }
+    .testi-card { background: #111; padding: 25px; border-radius: 15px; border-left: 4px solid var(--gold); margin-bottom: 20px; font-style: italic; }
+    .testi-author { display: block; margin-top: 10px; font-weight: bold; color: var(--gold); font-style: normal; }
 
-    /* CHATBOT FLOTANTE */
+    /* CHATBOT */
     #bot-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 10000; }
     #chat-window {
       display: none; width: 340px; height: 500px; background: #121212;
@@ -71,10 +69,16 @@
     
     .bot-trigger {
       background: transparent; width: 75px; height: 75px; border-radius: 50%;
-      border: none; cursor: pointer; box-shadow: 0 5px 20px rgba(255,224,130,0.4);
-      transition: 0.3s; overflow: hidden; padding: 0;
+      border: none; cursor: pointer; box-shadow: 0 0 0 0 rgba(255, 224, 130, 0.7);
+      animation: pulse-gold 2s infinite; overflow: hidden; padding: 0;
     }
     .bot-trigger img { width: 100%; height: 100%; object-fit: cover; border: 2px solid var(--gold); border-radius: 50%; }
+
+    @keyframes pulse-gold {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 224, 130, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255, 224, 130, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 224, 130, 0); }
+    }
 
     #modalRegistro {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -82,6 +86,8 @@
     }
     .modal-box { background: var(--card-bg); padding: 35px; border-radius: 25px; border: 1px solid var(--gold); width: 90%; max-width: 400px; }
     .modal-box input { width: 100%; padding: 15px; margin: 10px 0; background: #222; border: 1px solid #444; color: #fff; border-radius: 10px; box-sizing: border-box; }
+
+    @media (max-width: 600px) { .course-list { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -90,47 +96,80 @@
   <header>
     <img src="https://i.imgur.com/msGwxhP.png" alt="Logo" class="logo-maestro">
     <h1>Academia Divino Niño Jesús</h1>
-    <p>Educación Técnica impulsada por IA</p>
+    <p>La Primera Academia con IA Aplicada a Oficios Reales</p>
     <button onclick="openModal()" class="btn-gold">🚀 INSCRIBIRME AHORA</button>
   </header>
 
-  <img src="https://i.imgur.com/JS4xzVF.jpeg" style="width:100%; border-radius:20px; margin:30px 0;" alt="Formación IA">
-
   <div class="course-card">
-    <h2>🛠️ Área Industrial & Tecnología 4.0</h2>
-    <ul>
-      <li>IA en Robótica y Automatización</li>
-      <li>Mantenimiento Predictivo con IA</li>
-      <li>IA en Diagnóstico Electrónico de Vehículos</li>
-      <li>IA aplicada a Reparación de Computadoras y Celulares</li>
-      <li>Seguridad Industrial Inteligente</li>
+    <h2>🛠️ Área Industrial: Oficios 4.0</h2>
+    <ul class="course-list">
+      <li>Mecánica Automotriz con Diagnóstico IA</li>
+      <li>Reparación de Cajas Automáticas y Sensores</li>
+      <li>Mecánica de Motos con IA Predictiva</li>
+      <li>Mecánica Diesel y Optimización con IA</li>
+      <li>Electroauto y Escaneo Inteligente</li>
+      <li>Electrónica Aplicada a la Robótica</li>
+      <li>Rep. de Computadoras con IA de Hardware</li>
+      <li>Rep. de Tarjetas Electrónicas con IA</li>
+      <li>Rep. de Celulares y Microelectrónica</li>
+      <li>Electricidad Básica e Industrial con IA</li>
+      <li>Refrigeración Avanzada y Domótica</li>
+      <li>Refrigeración Automotriz Inteligente</li>
+      <li>Rep. de Electrodomésticos y Smart Home</li>
+      <li>Robótica y Automatización con IA</li>
+      <li>Seguridad Industrial y Monitoreo IA</li>
     </ul>
   </div>
 
   <div class="course-card">
-    <h2>📊 Área Comercial & Negocios Digitales</h2>
-    <ul>
-      <li>Marketing Digital con IA</li>
-      <li>Chatbots con IA para Atención al Cliente</li>
-      <li>Inteligencia Artificial en Recursos Humanos</li>
-      <li>Análisis de Datos con IA en Excel</li>
-      <li>IA en Logística y Gestión Aduanera</li>
+    <h2>📊 Área Comercial & Gestión Digital</h2>
+    <ul class="course-list">
+      <li>Inglés con IA (Básico a Avanzado)</li>
+      <li>Marketing Digital y Ventas con IA</li>
+      <li>Gestión de Redes Sociales con Chatbots</li>
+      <li>Asistente de Contabilidad con IA en la Nube</li>
+      <li>Mercadeo y Ventas con IA Persuasiva</li>
+      <li>Administración y Productividad con IA</li>
+      <li>Recursos Humanos (RRHH) con IA</li>
+      <li>Asistente de Aduana y Logística IA</li>
+      <li>Asistente de Preescolar con Herramientas IA</li>
+      <li>Asistente Jurídico y Análisis Legal con IA</li>
+      <li>Asistente de Farmacia y Farmacología IA</li>
+      <li>Computación y Ofimática con Herramientas IA</li>
+      <li>Excel con IA (Básico a Avanzado)</li>
+      <li>Matemática, Química y Física Asistida por IA</li>
     </ul>
   </div>
 
   <div class="course-card">
-    <h2>💅 Área Artesanal & Creatividad</h2>
-    <ul>
-      <li>Diseño Asistido con IA en Peluquería y Maquillaje</li>
-      <li>Moda y Corte con IA</li>
-      <li>Ajedrez con Entrenamiento basado en IA</li>
-      <li>Manualidades y Creatividad Digital con IA</li>
+    <h2>💅 Área Artesanal & Estética Profesional</h2>
+    <ul class="course-list">
+      <li>Peluquería y Diseño de Estilo con IA</li>
+      <li>Barbería Profesional y Visagismo con IA</li>
+      <li>Cejas y Pestañas con Diseño Asistido</li>
+      <li>Sistemas de Uñas y Nail Art Digital</li>
+      <li>Maquillaje Profesional con Filtros IA</li>
+      <li>Manicure y Pedicure con Cuidado Inteligente</li>
+      <li>Corte y Confección con Patrones IA</li>
+      <li>Manualidades y Creatividad con Generación IA</li>
+      <li>Ajedrez y Estrategia con Motores IA</li>
     </ul>
   </div>
 
-  <div class="cert-section">
-    <h2 style="justify-content: center;">Certificación Profesional</h2>
-    <p>Recibe un certificado con <b>Código QR</b> que avala tus nuevas habilidades tecnológicas.</p>
+  <div class="testimonials-container">
+    <h2 style="text-align:center">Historias de Éxito</h2>
+    <div class="testi-card">
+      "Pensé que la IA era solo para ingenieros, pero en el curso de Mecánica aprendí a usar escáneres inteligentes y mi taller ahora es el más avanzado de la zona."
+      <span class="testi-author">— Roberto G., Mecánico Industrial</span>
+    </div>
+    <div class="testi-card">
+      "Como asistente administrativo, la IA me ahorra horas de trabajo en Excel y redacción. Mis jefes están impresionados con mi nueva productividad."
+      <span class="testi-author">— Lucía M., Asistente Administrativo</span>
+    </div>
+    <div class="testi-card">
+      "En el área de Peluquería aprendí a proyectar cómo le quedará el color a mis clientas usando IA antes de empezar. ¡Mis ventas subieron un 50%!"
+      <span class="testi-author">— Carmen R., Estilista Profesional</span>
+    </div>
   </div>
 
   <button onclick="openModal()" class="btn-gold">RESERVAR MI CUPO (20$)</button>
@@ -138,17 +177,17 @@
 
   <div class="course-card" style="border: 2px solid var(--gold); text-align: center;">
     <img src="https://i.imgur.com/FwSvlok.jpeg" alt="Asistente IA" style="width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 15px; object-fit: cover;">
-    <h2 style="justify-content: center;">¿Tienes alguna pregunta?</h2>
-    <p>Nuestra asistente está lista para ayudarte con información sobre horarios y pagos.</p>
-    <button onclick="openChatFromCard()" class="btn-gold" style="width: auto; padding: 15px 40px; margin: 0 auto;">🗨️ CHATEAR CON LA IA</button>
+    <h2 style="justify-content: center;">¿Tienes dudas sobre algún curso?</h2>
+    <p>Estoy aquí para explicarte cómo aplicamos la IA en cada oficio. ¡Pregúntame!</p>
+    <button onclick="openChatFromCard()" class="btn-gold" style="width: auto; padding: 15px 40px; margin: 0 auto;">🗨️ HABLAR CON LA IA</button>
   </div>
 
-  <p style="text-align: center; color: #444; font-size: 0.8em;">© 2026 Academia Divino Niño Jesús.</p>
+  <p style="text-align: center; color: #444; font-size: 0.8em; margin: 50px 0;">© 2026 Academia Divino Niño Jesús. Tecnología al servicio del trabajo.</p>
 </div>
 
 <div id="modalRegistro">
   <div class="modal-box">
-    <h2 style="text-align:center">Pre-Inscripción</h2>
+    <h2 style="text-align:center">Inscripción</h2>
     <form id="sheet-form">
       <input type="text" name="nombre" placeholder="Nombre completo" required>
       <input type="email" name="correo" placeholder="Correo electrónico" required>
@@ -166,10 +205,10 @@
       <button onclick="toggleChat()" style="background:none; border:none; cursor:pointer; font-size:20px;">✕</button>
     </div>
     <div id="chat-messages">
-      <div><b>IA:</b> ¡Hola! 👋 Soy tu asistente virtual. ¿En qué curso de <b>20$</b> puedo ayudarte hoy?</div>
+      <div><b>IA:</b> ¡Hola! 👋 ¿Sabías que por solo <b>20$</b> puedes aprender a dominar tu oficio con IA? ¿Qué curso te interesa hoy?</div>
     </div>
     <div class="chat-input-container">
-      <input id="chat-input" type="text" placeholder="Escribe tu duda aquí...">
+      <input id="chat-input" type="text" placeholder="Escribre tu duda...">
       <button onclick="callGroq()" style="background:var(--gold); border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold;">▶</button>
     </div>
   </div>
@@ -187,16 +226,14 @@
   function toggleChat() { document.getElementById('chat-window').classList.toggle('active'); }
   function openChatFromCard() { document.getElementById('chat-window').classList.add('active'); document.getElementById('chat-input').focus(); }
 
-  // ENVÍO DE FORMULARIO
   document.getElementById('sheet-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.innerText = "ENVIANDO...";
     fetch(scriptURL, { method: 'POST', body: new FormData(this)})
-      .then(() => { alert("¡Registro exitoso!"); closeModal(); this.reset(); btn.innerText = "ENVIAR DATOS"; });
+      .then(() => { alert("¡Registro exitoso! Pronto te contactaremos."); closeModal(); this.reset(); btn.innerText = "ENVIAR DATOS"; });
   });
 
-  // LLAMADA A IA
   async function callGroq() {
     const input = document.getElementById('chat-input');
     const logs = document.getElementById('chat-messages');
@@ -208,7 +245,7 @@
     logs.scrollTop = logs.scrollHeight;
 
     const loading = document.createElement('div');
-    loading.innerHTML = "<i>IA respondiendo...</i>";
+    loading.innerHTML = "<i>IA analizando...</i>";
     logs.appendChild(loading);
 
     try {
@@ -216,12 +253,11 @@
       const data = await res.json();
       loading.innerHTML = `<b>IA:</b><br>${data.answer.replace(/\n/g, '<br>')}`;
     } catch {
-      loading.innerHTML = "Error de conexión. Contacta al +58 422 4006612.";
+      loading.innerHTML = "Error de conexión. WhatsApp: +58 422 4006612.";
     }
     logs.scrollTop = logs.scrollHeight;
   }
 
-  // APERTURA AUTOMÁTICA A LOS 5 SEGUNDOS
   window.addEventListener('load', () => {
     setTimeout(() => {
       const chatWin = document.getElementById('chat-window');
