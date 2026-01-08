@@ -3,308 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academia Divino Niño Jesús | Formación Completa con IA</title>
+  <title>Academia Divino Niño Jesús | Certificación con IA</title>
   <style>
-    html { scroll-behavior: smooth; overflow-y: auto; }
+    :root {
+      --gold: #ffe082;
+      --dark-gold: #ffb300;
+      --bg: #0a0a0a;
+      --card-bg: #161616;
+      --text: #e0e0e0;
+    }
+
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      background-color: #111;
-      color: #eee;
-      line-height: 1.6;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
     }
-    .main-container { padding: 10px; max-width: 800px; margin: auto; }
-    
-    header { text-align: center; padding: 40px 10px; border-bottom: 2px solid #ffe082; }
-    .logo-maestro { width: 260px; max-width: 85%; height: auto; margin-bottom: 20px; }
-    h1, h2, h3 { color: #ffe082; text-align: center; }
 
+    .main-container { padding: 20px; max-width: 900px; margin: auto; }
+
+    /* HEADER */
+    header { text-align: center; padding: 60px 20px; border-bottom: 1px solid rgba(255, 224, 130, 0.2); }
+    .logo-maestro { width: 200px; filter: drop-shadow(0 0 10px rgba(255,224,130,0.3)); }
+    h1 { font-size: 2.5rem; background: linear-gradient(90deg, var(--gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* TARJETAS DE CURSOS */
     .course-card {
-      background: #1c1c1c;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 25px 0;
-      border: 1px solid #333;
+      background: var(--card-bg); border-radius: 20px; padding: 30px; margin: 30px 0;
+      border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
+    h2 { color: var(--gold); }
+    li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; }
+    li::before { content: "⚡"; margin-right: 15px; color: var(--gold); }
 
-    ul { list-style: none; padding: 0; }
-    li { 
-      padding: 12px 0; border-bottom: 1px solid #2a2a2a;
-      display: flex; align-items: center; flex-wrap: wrap;
+    /* NUEVA SECCIÓN: CERTIFICACIÓN */
+    .cert-section {
+      text-align: center; background: linear-gradient(rgba(255,224,130,0.05), transparent);
+      padding: 40px; border-radius: 20px; border: 1px solid rgba(255,224,130,0.2); margin: 40px 0;
     }
-    li:last-child { border: none; }
-    li::before { content: "🤖"; margin-right: 10px; color: #ffe082; }
+    .cert-icon { font-size: 50px; margin-bottom: 10px; }
 
+    /* NUEVA SECCIÓN: TESTIMONIOS */
+    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+    .testi-card { background: #111; padding: 20px; border-radius: 15px; border-left: 4px solid var(--gold); font-style: italic; }
+    .testi-author { display: block; margin-top: 10px; font-weight: bold; color: var(--gold); font-style: normal; font-size: 0.9em; }
+
+    /* BOTONES */
     .btn-gold {
-      display: block; width: 85%; max-width: 320px;
-      margin: 20px auto; background: linear-gradient(90deg, #ffe082, #ffb300);
-      color: #000; text-align: center; padding: 18px;
-      font-size: 19px; font-weight: bold; border-radius: 50px;
-      cursor: pointer; border: none; text-decoration: none;
-      transition: 0.3s;
+      display: block; width: 100%; max-width: 350px; padding: 20px; margin: 15px auto;
+      background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+      color: #000; text-decoration: none; text-align: center; font-weight: 800;
+      border-radius: 12px; border: none; cursor: pointer; text-transform: uppercase;
     }
-    .btn-gold:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255, 224, 130, 0.4); }
-    .whatsapp-btn { background-color: #25d366; color: white; }
-    .whatsapp-btn:hover { background-color: #20ba5a; }
+    .whatsapp-btn { background: #25d366; color: white; }
 
-    #modalRegistro {
-      display: none; position: fixed; top: 0; left: 0; 
-      width: 100%; height: 100%; background: rgba(0,0,0,0.95); 
-      z-index: 99999; justify-content: center; align-items: flex-start; 
-      padding-top: 20px; overflow-y: auto;
-    }
-    .modal-box {
-      background: #1c1c1c; padding: 25px; border-radius: 20px;
-      border: 2px solid #ffe082; width: 90%; max-width: 400px;
-      margin-bottom: 20px;
-    }
-    .modal-box input {
-      width: 100%; padding: 12px; margin: 10px 0;
-      background: #222; border: 1px solid #444; color: #fff; border-radius: 8px;
-      box-sizing: border-box;
-    }
-
-    #bot-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 10000; }
+    /* CHATBOT */
+    #bot-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 10000; }
     #chat-window {
-      display: none; width: 300px; height: 450px;
-      background: #1c1c1c; border: 2px solid #ffe082;
-      border-radius: 15px; flex-direction: column; margin-bottom: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      display: none; width: 330px; height: 480px; background: #121212;
+      border: 1px solid var(--gold); border-radius: 20px; flex-direction: column;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.8); overflow: hidden; margin-bottom: 15px;
     }
     #chat-window.active { display: flex; }
-    #chat-messages { 
-      flex: 1; overflow-y: auto; padding: 15px; 
-      font-size: 0.9em; background: #111; 
-      border-radius: 0 0 13px 13px;
-    }
-    #chat-messages::-webkit-scrollbar { width: 6px; }
-    #chat-messages::-webkit-scrollbar-thumb { background: #ffe082; border-radius: 3px; }
-    .bot-trigger {
-      background: #ffe082; width: 60px; height: 60px;
-      border-radius: 50%; border: none; cursor: pointer; font-size: 30px;
-      box-shadow: 0 0 15px #ffe082;
-      transition: transform 0.3s;
-    }
-    .bot-trigger:hover { transform: scale(1.1); }
+    .chat-top { background: var(--gold); color: #000; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
+    #chat-messages { flex: 1; overflow-y: auto; padding: 15px; background: #0a0a0a; font-size: 0.9em; }
+    .chat-input-container { padding: 10px; background: #161616; display: flex; gap: 5px; }
+    #chat-input { flex: 1; background: #222; border: 1px solid #333; color: white; padding: 10px; border-radius: 8px; }
+    .bot-trigger { background: var(--gold); width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer; font-size: 25px; box-shadow: 0 5px 20px rgba(255,224,130,0.4); }
 
-    .ai-promo-card {
-      background: #1c1c1c; border: 2px dashed #ffe082;
-      border-radius: 15px; padding: 20px; text-align: center; margin: 40px 0;
+    /* MODAL */
+    #modalRegistro {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9); z-index: 99999; justify-content: center; align-items: center;
     }
+    .modal-box { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--gold); width: 90%; max-width: 380px; }
+    .modal-box input { width: 100%; padding: 12px; margin: 8px 0; background: #222; border: 1px solid #444; color: #fff; border-radius: 8px; box-sizing: border-box; }
 
-    .img-fluid { width: 100%; border-radius: 12px; margin: 20px 0; }
-    blockquote { 
-      border-left: 4px solid #ffe082; padding: 15px; 
-      background: #1a1a1a; font-style: italic; text-align: center; 
-      margin: 30px 0;
-    }
-
-    @media (max-width: 600px) {
-      #chat-window { width: 280px; height: 400px; }
-      .btn-gold { font-size: 16px; padding: 15px; }
-    }
+    @media (max-width: 600px) { .testimonials-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
 <div class="main-container">
   <header>
-    <img src="https://i.imgur.com/msGwxhP.png" alt="Logo Academia" class="logo-maestro">
+    <img src="https://i.imgur.com/msGwxhP.png" alt="Logo" class="logo-maestro">
     <h1>Academia Divino Niño Jesús</h1>
-    <p>Educación Técnica de Vanguardia impulsada por IA</p>
-    <button onclick="openModal()" class="btn-gold">INSCRIBIRME AHORA</button>
+    <p>Formación Técnica Profesional con IA</p>
+    <button onclick="openModal()" class="btn-gold">🚀 INSCRIBIRME AHORA</button>
   </header>
 
-  <img src="https://i.imgur.com/JS4xzVF.jpeg" class="img-fluid" alt="Formación con IA">
-
   <div class="course-card">
-    <h2>🛠️ Área Industrial & Tecnología 4.0</h2>
+    <h2>🛠️ Áreas Industriales y Oficios</h2>
     <ul>
-      <li>IA en Robótica y Automatización</li>
-      <li>Mantenimiento Predictivo con IA</li>
-      <li>IA en Diagnóstico Electrónico de Vehículos</li>
-      <li>IA aplicada a Reparación de Computadoras y Celulares</li>
-      <li>Seguridad Industrial con Monitoreo Inteligente</li>
+      <li>IA en Robótica y Mantenimiento Industrial</li>
+      <li>Reparación de PC y Celulares con Diagnóstico IA</li>
+      <li>Peluquería y Moda: Diseño Asistido por IA</li>
+      <li>Mecánica Automotriz y Escaneo Inteligente</li>
     </ul>
   </div>
 
-  <div class="course-card">
-    <h2>📊 Área Comercial & Negocios Digitales</h2>
-    <ul>
-      <li>Marketing Digital con Inteligencia Artificial</li>
-      <li>Chatbots con IA para Atención al Cliente</li>
-      <li>Inteligencia Artificial en Recursos Humanos</li>
-      <li>Análisis de Datos con IA en Excel</li>
-      <div id="modalRegistro">
-    <div class="modal-box">
-      <div style="text-align:right">
-        <button onclick="closeModal()" style="background:none; border:none; color:#ffe082; cursor:pointer; font-size:30px;">✕</button>
+  <div class="cert-section">
+    <div class="cert-icon">📜</div>
+    <h2 style="margin:0">Certificación Avalada</h2>
+    <p>Al completar cada curso, recibes un certificado con código QR único que acredita tus competencias en el uso de Herramientas de Inteligencia Artificial aplicadas a tu oficio.</p>
+  </div>
+
+  <div style="margin: 40px 0;">
+    <h2 style="text-align: center;">Lo que dicen nuestros graduados</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        "Gracias al curso de Reparación de PC con IA, ahora diagnostico fallas en la mitad del tiempo. ¡Mi taller creció un 40%!"
+        <span class="testi-author">— Carlos R., Técnico Electrónico</span>
       </div>
-      <h3 style="margin:0 0 20px 0">Pre-Inscripción</h3>
-      <form id="sheet-form">
-        <input type="text" name="nombre" placeholder="Nombre completo" required>
-        <input type="email" name="correo" placeholder="Correo electrónico" required>
-        <input type="tel" name="whatsapp" placeholder="WhatsApp (Ej: +58412...)" required>
-        <button type="submit" id="submitBtn" class="btn-gold" style="width:100%; margin-top:10px;">ENVIAR DATOS</button>
-      </form>
-      <div id="successMsg" style="display:none; color:#25d366; text-align:center; margin-top:15px; font-weight:bold;">✅ ¡Registro exitoso!</div>
+      <div class="testi-card">
+        "El curso de Marketing con IA me permitió automatizar mis ventas. La inversión de 20$ fue la mejor de mi año."
+        <span class="testi-author">— Elena M., Emprendedora Digital</span>
+      </div>
     </div>
   </div>
 
-  <div id="bot-wrapper">
-    <div id="chat-window">
-      <div style="background:#ffe082; color:#111; padding:12px; font-weight:bold; border-radius:13px 13px 0 0; display:flex; justify-content:space-between; align-items:center;">
-        <span>🤖 IA Divino Niño</span>
-        <button onclick="toggleChat()" style="background:none; border:none; cursor:pointer; font-size:20px; color:#111;">✕</button>
-      </div>
-      <div id="chat-messages">
-        <div><b>IA:</b> Hola 👋 ¿Sobre qué curso con IA te gustaría saber más? Solo <b>20 $ o 25 €</b> por curso completo.</div>
-      </div>
-      <div style="padding:10px; border-top:1px solid #333; display:flex; background:#1c1c1c; border-radius: 0 0 13px 13px;">
-        <input id="chat-input" type="text" placeholder="Ej: robotica, chatbots, peluqueria..." style="flex:1; background:#222; color:#fff; border:none; padding:10px; border-radius:5px; outline:none;">
-        <button onclick="callGroq()" style="background:#ffe082; border:none; margin-left:5px; padding:10px 15px; border-radius:5px; font-weight:bold; color:#111; cursor:pointer;">▶</button>
-      </div>
-    </div>
-    <button onclick="toggleChat()" class="bot-trigger">🤖</button>
+  <div style="text-align: center; padding: 20px; border: 1px dashed var(--gold); border-radius: 15px; margin: 40px 0;">
+    <h3 style="color: var(--gold); margin: 0;">✅ Garantía de Aprendizaje</h3>
+    <p style="font-size: 0.9em; color: #aaa;">Acceso de por vida al contenido y soporte permanente vía Chat IA y WhatsApp.</p>
   </div>
 
-  <p style="text-align: center; font-size: 0.8em; padding: 40px 0; color: #666;">
-    © 2026 Academia Divino Niño Jesús. Todos los derechos reservados.
-  </p>
+  <button onclick="openModal()" class="btn-gold">RESERVAR MI CUPO (20$)</button>
+  <a href="https://wa.me/584224006612" class="btn-gold whatsapp-btn">RESERVAR POR WHATSAPP</a>
+
+  <p style="text-align: center; color: #444; font-size: 0.8em; margin-top: 50px;">© 2026 Academia Divino Niño Jesús.</p>
+</div>
+
+<div id="modalRegistro">
+  <div class="modal-box">
+    <h2 style="text-align:center; margin-top:0">Pre-Inscripción</h2>
+    <form id="sheet-form">
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="email" name="correo" placeholder="Correo electrónico" required>
+      <input type="tel" name="whatsapp" placeholder="WhatsApp" required>
+      <button type="submit" id="submitBtn" class="btn-gold" style="width:100%">ENVIAR DATOS</button>
+      <button type="button" onclick="closeModal()" style="background:none; border:none; color:#666; width:100%; margin-top:10px; cursor:pointer">Cancelar</button>
+    </form>
+    <div id="successMsg" style="display:none; color:#25d366; text-align:center; margin-top:15px; font-weight:bold;">✅ ¡Registro exitoso!</div>
+  </div>
+</div>
+
+<div id="bot-wrapper">
+  <div id="chat-window">
+    <div class="chat-top">
+      <span>🤖 IA ACADÉMICA</span>
+      <button onclick="toggleChat()" style="background:none; border:none; cursor:pointer; font-size:20px;">✕</button>
+    </div>
+    <div id="chat-messages">
+      <div><b>IA:</b> ¡Hola! 👋 ¿Sabías que por solo <b>20$</b> puedes aprender a usar IA en tu trabajo? ¿Qué curso te interesa?</div>
+    </div>
+    <div class="chat-input-container">
+      <input id="chat-input" type="text" placeholder="Escribe tu duda...">
+      <button onclick="callGroq()" style="background:var(--gold); border:none; padding:10px; border-radius:8px; cursor:pointer;">▶</button>
+    </div>
+  </div>
+  <button onclick="toggleChat()" class="bot-trigger">🤖</button>
 </div>
 
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbz3xUdlictsCEdsIrSwDUK7F68hImDR8dLm3YsBM00RbmRjfJ0qy-DMNH6MOF60FDDCuQ/exec';
-  const GROQ_PROXY_URL = 'https://script.google.com/macros/s/AKfycbxHSOAWz6OiMMd2OY2T2q2M6HtWgCq0iTnk2triVuzKaAjWKRa16FnFHTSVemrrFxKJoQ/exec';
+  const GROQ_URL = 'https://script.google.com/macros/s/AKfycbyKGKGzUHWSyni6qyAeOtFqOmQuW3d1nlzHxoKgICMW9YbvFB9JO4SZ0GQMPKPh1qRicw/exec';
 
   function openModal() { document.getElementById('modalRegistro').style.display = 'flex'; }
   function closeModal() { document.getElementById('modalRegistro').style.display = 'none'; }
+  function toggleChat() { document.getElementById('chat-window').classList.toggle('active'); }
 
   document.getElementById('sheet-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    const originalText = btn.innerText;
-    btn.innerText = "ENVIANDO..."; 
-    btn.disabled = true;
-    
+    btn.innerText = "ENVIANDO...";
     fetch(scriptURL, { method: 'POST', body: new FormData(this)})
       .then(() => {
         document.getElementById('successMsg').style.display = 'block';
-        setTimeout(() => {
-          closeModal(); 
-          this.reset(); 
-          btn.disabled = false; 
-          btn.innerText = originalText;
-          document.getElementById('successMsg').style.display = 'none';
-        }, 2000);
-      })
-      .catch(() => {
-        alert("Error al enviar. Por favor escríbenos al WhatsApp: +58 422 4006612");
-        btn.disabled = false;
-        btn.innerText = originalText;
+        setTimeout(() => { closeModal(); this.reset(); btn.innerText = "ENVIAR DATOS"; document.getElementById('successMsg').style.display = 'none'; }, 2000);
       });
   });
-
-  function toggleChat() {
-    const win = document.getElementById('chat-window');
-    win.classList.toggle('active');
-    if (win.classList.contains('active')) {
-      document.getElementById('chat-input').focus();
-    }
-  }
-
-  function openChatFromCard() {
-    document.getElementById('chat-window').classList.add('active');
-    document.getElementById('chat-input').focus();
-  }
-
-  const syllabi = {
-    "robotica": "🤖 IA en Robótica y Automatización:\n• Módulo 1: Fundamentos de robots y sensores\n• Módulo 2: Programación con Python y simuladores IA\n• Módulo 3: Sistemas de visión artificial\n• Módulo 4: Proyecto: robot autónomo con IA\nEvaluación: 25% por módulo.",
-    "automatizacion": "🤖 IA en Robótica y Automatización:\n• Módulo 1: Fundamentos de robots y sensores\n• Módulo 2: Programación con Python y simuladores IA\n• Módulo 3: Sistemas de visión artificial\n• Módulo 4: Proyecto: robot autónomo con IA\nEvaluación: 25% por módulo.",
-    "mantenimiento": "⚙️ Mantenimiento Predictivo con IA:\n• Módulo 1: Sensores IoT y monitoreo en tiempo real\n• Módulo 2: Análisis de vibraciones y temperatura\n• Módulo 3: Modelos predictivos con IA\n• Módulo 4: Caso industrial real\nEvaluación: 25% por módulo.",
-    "vehiculo": "🚗 IA en Diagnóstico Electrónico de Vehículos:\n• Módulo 1: Sistemas OBD2 y redes CAN\n• Módulo 2: Uso de escáneres con IA\n• Módulo 3: Interpretación automática de fallas\n• Módulo 4: Simulación de taller inteligente\nEvaluación: 25% por módulo.",
-    "carro": "🚗 IA en Diagnóstico Electrónico de Vehículos:\n• Módulo 1: Sistemas OBD2 y redes CAN\n• Módulo 2: Uso de escáneres con IA\n• Módulo 3: Interpretación automática de fallas\n• Módulo 4: Simulación de taller inteligente\nEvaluación: 25% por módulo.",
-    "computadora": "💻 IA aplicada a Reparación de Computadoras y Celulares:\n• Módulo 1: Diagnóstico de hardware con IA\n• Módulo 2: Software de recuperación y flash\n• Módulo 3: Reparación de placas y componentes\n• Módulo 4: Gestión de taller digital\nEvaluación: 25% por módulo.",
-    "celular": "💻 IA aplicada a Reparación de Computadoras y Celulares:\n• Módulo 1: Diagnóstico de hardware con IA\n• Módulo 2: Software de recuperación y flash\n• Módulo 3: Reparación de placas y componentes\n• Módulo 4: Gestión de taller digital\nEvaluación: 25% por módulo.",
-    "marketing": "📣 Marketing Digital con IA:\n• Módulo 1: Estrategia y buyer persona\n• Módulo 2: Creación de contenido con IA\n• Módulo 3: Campañas automatizadas\n• Módulo 4: Análisis y optimización IA\nEvaluación: 25% por módulo.",
-    "chatbot": "💬 Chatbots con IA para Atención al Cliente:\n• Módulo 1: Diseño de flujos conversacionales\n• Módulo 2: Integración con WhatsApp y web\n• Módulo 3: Entrenamiento con historial real\n• Módulo 4: Implementación y métricas\nEvaluación: 25% por módulo.",
-    "excel": "📊 Análisis de Datos con IA en Excel:\n• Módulo 1: Fórmulas y tablas dinámicas\n• Módulo 2: Power Query + IA\n• Módulo 3: Visualización inteligente\n• Módulo 4: Caso: análisis financiero\nEvaluación: 25% por módulo.",
-    "datos": "📊 Análisis de Datos con IA en Excel:\n• Módulo 1: Fórmulas y tablas dinámicas\n• Módulo 2: Power Query + IA\n• Módulo 3: Visualización inteligente\n• Módulo 4: Caso: análisis financiero\nEvaluación: 25% por módulo.",
-    "idioma": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo."
-  };
-
-  function findCourseInMessage(text) {
-    const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    for (const [key, value] of Object.entries(syllabi)) {
-      const keyNoAccent = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      if (lower.includes(keyNoAccent)) return value;
-    }
-    return null;
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
 
   async function callGroq() {
     const input = document.getElementById('chat-input');
     const logs = document.getElementById('chat-messages');
     let txt = input.value.trim();
-    
     if (!txt) return;
 
-    logs.innerHTML += <div style="text-align:right; color:#ffe082; margin-top:10px;"><b>Tú:</b> ${escapeHtml(txt)}</div>;
+    logs.innerHTML += `<div style="text-align:right; margin-top:10px; color:var(--gold)"><b>Tú:</b> ${txt}</div>`;
     input.value = "";
     logs.scrollTop = logs.scrollHeight;
 
-    const courseInfo = findCourseInMessage(txt);
-    if (courseInfo) {
-      const reply =📚 ${courseInfo}\n\n✨ Inversión: solo <b>20 $ o 25 €</b> por curso completo con certificado.\n📱 ¿Reservamos tu cupo? Escríbenos al WhatsApp: <b>+58 422 4006612</b>.`;
-      logs.innerHTML += <div style="margin-top:10px;"><b>IA:</b> ${reply.replace(/\n/g, '<br>')}</div>;
-      logs.scrollTop = logs.scrollHeight;
-      return;
-    }
-
-    logs.innerHTML += <div id="loading-msg" style="margin-top:10px; color:#999;"><i>Pensando...</i></div>;
-    logs.scrollTop = logs.scrollHeight;
+    const loading = document.createElement('div');
+    loading.style.marginTop = "10px";
+    loading.innerHTML = "<i>IA respondiendo...</i>";
+    logs.appendChild(loading);
 
     try {
-      const res = await fetch(GROQ_PROXY_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: txt })
-      });
-
-      const loadingMsg = document.getElementById('loading-msg');
-      if (loadingMsg) loadingMsg.remove();
-
-      if (!res.ok) throw new Error("Error en el proxy");
-
+      const res = await fetch(`${GROQ_URL}?message=${encodeURIComponent(txt)}`);
       const data = await res.json();
-      if (data.error) throw new Error(data.error);
-
-      let answer = data.answer || "Lo siento, no pude procesar la respuesta.";
-      logs.innerHTML += <div style="margin-top:10px;"><b>IA:</b> ${escapeHtml(answer).replace(/\n/g, '<br>')}</div>;
-      logs.scrollTop = logs.scrollHeight;
-
-    } catch (err) {
-      console.error(err);
-      const loadingMsg = document.getElementById('loading-msg');
-      if (loadingMsg) loadingMsg.remove();
-      
-      logs.innerHTML += <div style="color:#ff6b6b; margin-top:10px;"><b>IA:</b> 😔 En este momento el servicio IA está temporalmente no disponible.<br>Por favor contáctanos directamente al WhatsApp: <b>+58 422 4006612</b><br>¡Te atenderemos de inmediato!</div>;
-      logs.scrollTop = logs.scrollHeight;
+      loading.innerHTML = `<b>IA:</b><br>${data.answer.replace(/\n/g, '<br>')}`;
+    } catch {
+      loading.innerHTML = "Error. Contacta al +58 422 4006612.";
     }
+    logs.scrollTop = logs.scrollHeight;
   }
-
-  document.getElementById('chat-input').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      callGroq();
-    }
-  });
+  document.getElementById('chat-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') callGroq(); });
 </script>
+
 </body>
 </html>
