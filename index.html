@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Academia Divino Niño Jesús | Formación Completa con IA</title>
   <style>
-    /* OPTIMIZACIÓN Y SCROLL */
     html { scroll-behavior: smooth; overflow-y: auto; }
     body {
       margin: 0;
@@ -20,14 +19,6 @@
     .logo-maestro { width: 260px; max-width: 85%; height: auto; margin-bottom: 20px; }
     h1, h2, h3 { color: #ffe082; text-align: center; }
 
-    /* ETIQUETA IA */
-    .ia-tag { 
-      background: linear-gradient(90deg, #ffe082, #ffb300);
-      color: #000; padding: 2px 8px; border-radius: 4px;
-      font-size: 0.8em; font-weight: bold; margin-left: 5px;
-    }
-
-    /* TARJETAS DE CURSOS */
     .course-card {
       background: #1c1c1c;
       border-radius: 15px;
@@ -44,7 +35,6 @@
     li:last-child { border: none; }
     li::before { content: "🤖"; margin-right: 10px; color: #ffe082; }
 
-    /* BOTONES */
     .btn-gold {
       display: block; width: 85%; max-width: 320px;
       margin: 20px auto; background: linear-gradient(90deg, #ffe082, #ffb300);
@@ -57,7 +47,6 @@
     .whatsapp-btn { background-color: #25d366; color: white; }
     .whatsapp-btn:hover { background-color: #20ba5a; }
 
-    /* MODAL (FIJO ARRIBA) */
     #modalRegistro {
       display: none; position: fixed; top: 0; left: 0; 
       width: 100%; height: 100%; background: rgba(0,0,0,0.95); 
@@ -75,7 +64,6 @@
       box-sizing: border-box;
     }
 
-    /* CHATBOT FLOTANTE */
     #bot-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 10000; }
     #chat-window {
       display: none; width: 300px; height: 450px;
@@ -99,7 +87,6 @@
     }
     .bot-trigger:hover { transform: scale(1.1); }
 
-    /* TARJETA IA AL FINAL */
     .ai-promo-card {
       background: #1c1c1c; border: 2px dashed #ffe082;
       border-radius: 15px; padding: 20px; text-align: center; margin: 40px 0;
@@ -112,7 +99,6 @@
       margin: 30px 0;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 600px) {
       #chat-window { width: 280px; height: 400px; }
       .btn-gold { font-size: 16px; padding: 15px; }
@@ -181,7 +167,6 @@
     "Formando profesionales capaces de dominar las herramientas del mañana, con los valores de siempre."
   </blockquote>
 
-  <!-- MODAL DE REGISTRO -->
   <div id="modalRegistro">
     <div class="modal-box">
       <div style="text-align:right">
@@ -198,7 +183,6 @@
     </div>
   </div>
 
-  <!-- CHATBOT FLOTANTE -->
   <div id="bot-wrapper">
     <div id="chat-window">
       <div style="background:#ffe082; color:#111; padding:12px; font-weight:bold; border-radius:13px 13px 0 0; display:flex; justify-content:space-between; align-items:center;">
@@ -209,7 +193,7 @@
         <div><b>IA:</b> Hola 👋 ¿Sobre qué curso con IA te gustaría saber más? Solo <b>20 $ o 25 €</b> por curso completo.</div>
       </div>
       <div style="padding:10px; border-top:1px solid #333; display:flex; background:#1c1c1c; border-radius: 0 0 13px 13px;">
-        <input id="chat-input" type="text" placeholder="Ej: robótica, chatbots, peluquería..." style="flex:1; background:#222; color:#fff; border:none; padding:10px; border-radius:5px; outline:none;">
+        <input id="chat-input" type="text" placeholder="Ej: robotica, chatbots, peluqueria..." style="flex:1; background:#222; color:#fff; border:none; padding:10px; border-radius:5px; outline:none;">
         <button onclick="callGroq()" style="background:#ffe082; border:none; margin-left:5px; padding:10px 15px; border-radius:5px; font-weight:bold; color:#111; cursor:pointer;">▶</button>
       </div>
     </div>
@@ -222,22 +206,12 @@
 </div>
 
 <script>
-  // URL DE GOOGLE SHEETS PARA REGISTROS
   const scriptURL = 'https://script.google.com/macros/s/AKfycbz3xUdlictsCEdsIrSwDUK7F68hImDR8dLm3YsBM00RbmRjfJ0qy-DMNH6MOF60FDDCuQ/exec';
-  
-  // URL DEL PROXY GROQ
   const GROQ_PROXY_URL = 'https://script.google.com/macros/s/AKfycbxHSOAWz6OiMMd2OY2T2q2M6HtWgCq0iTnk2triVuzKaAjWKRa16FnFHTSVemrrFxKJoQ/exec';
 
-  // === FUNCIONES DEL MODAL ===
-  function openModal() { 
-    document.getElementById('modalRegistro').style.display = 'flex'; 
-  }
-  
-  function closeModal() { 
-    document.getElementById('modalRegistro').style.display = 'none'; 
-  }
+  function openModal() { document.getElementById('modalRegistro').style.display = 'flex'; }
+  function closeModal() { document.getElementById('modalRegistro').style.display = 'none'; }
 
-  // === ENVÍO DE FORMULARIO A GOOGLE SHEETS ===
   document.getElementById('sheet-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
@@ -263,7 +237,6 @@
       });
   });
 
-  // === FUNCIONES DEL CHATBOT ===
   function toggleChat() {
     const win = document.getElementById('chat-window');
     win.classList.toggle('active');
@@ -277,52 +250,40 @@
     document.getElementById('chat-input').focus();
   }
 
-  // === BASE DE CONOCIMIENTO LOCAL ===
   const syllabi = {
-    "robótica": "🤖 IA en Robótica y Automatización:\n• Módulo 1: Fundamentos de robots y sensores\n• Módulo 2: Programación con Python y simuladores IA\n• Módulo 3: Sistemas de visión artificial\n• Módulo 4: Proyecto: robot autónomo con IA\nEvaluación: 25% por módulo.",
-    "automatización": "🤖 IA en Robótica y Automatización:\n• Módulo 1: Fundamentos de robots y sensores\n• Módulo 2: Programación con Python y simuladores IA\n• Módulo 3: Sistemas de visión artificial\n• Módulo 4: Proyecto: robot autónomo con IA\nEvaluación: 25% por módulo.",
+    "robotica": "🤖 IA en Robótica y Automatización:\n• Módulo 1: Fundamentos de robots y sensores\n• Módulo 2: Programación con Python y simuladores IA\n• Módulo 3: Sistemas de visión artificial\n• Módulo 4: Proyecto: robot autónomo con IA\nEvaluación: 25% por módulo.",
+    "automatizacion": "🤖 IA en Robótica y Automatización:\n• Módulo 1: Fundamentos de robots y sensores\n• Módulo 2: Programación con Python y simuladores IA\n• Módulo 3: Sistemas de visión artificial\n• Módulo 4: Proyecto: robot autónomo con IA\nEvaluación: 25% por módulo.",
     "mantenimiento": "⚙️ Mantenimiento Predictivo con IA:\n• Módulo 1: Sensores IoT y monitoreo en tiempo real\n• Módulo 2: Análisis de vibraciones y temperatura\n• Módulo 3: Modelos predictivos con IA\n• Módulo 4: Caso industrial real\nEvaluación: 25% por módulo.",
-    "predictivo": "⚙️ Mantenimiento Predictivo con IA:\n• Módulo 1: Sensores IoT y monitoreo en tiempo real\n• Módulo 2: Análisis de vibraciones y temperatura\n• Módulo 3: Modelos predictivos con IA\n• Módulo 4: Caso industrial real\nEvaluación: 25% por módulo.",
-    "vehículo": "🚗 IA en Diagnóstico Electrónico de Vehículos:\n• Módulo 1: Sistemas OBD2 y redes CAN\n• Módulo 2: Uso de escáneres con IA\n• Módulo 3: Interpretación automática de fallas\n• Módulo 4: Simulación de taller inteligente\nEvaluación: 25% por módulo.",
-    "automotriz": "🚗 IA en Diagnóstico Electrónico de Vehículos:\n• Módulo 1: Sistemas OBD2 y redes CAN\n• Módulo 2: Uso de escáneres con IA\n• Módulo 3: Interpretación automática de fallas\n• Módulo 4: Simulación de taller inteligente\nEvaluación: 25% por módulo.",
+    "vehiculo": "🚗 IA en Diagnóstico Electrónico de Vehículos:\n• Módulo 1: Sistemas OBD2 y redes CAN\n• Módulo 2: Uso de escáneres con IA\n• Módulo 3: Interpretación automática de fallas\n• Módulo 4: Simulación de taller inteligente\nEvaluación: 25% por módulo.",
     "carro": "🚗 IA en Diagnóstico Electrónico de Vehículos:\n• Módulo 1: Sistemas OBD2 y redes CAN\n• Módulo 2: Uso de escáneres con IA\n• Módulo 3: Interpretación automática de fallas\n• Módulo 4: Simulación de taller inteligente\nEvaluación: 25% por módulo.",
     "computadora": "💻 IA aplicada a Reparación de Computadoras y Celulares:\n• Módulo 1: Diagnóstico de hardware con IA\n• Módulo 2: Software de recuperación y flash\n• Módulo 3: Reparación de placas y componentes\n• Módulo 4: Gestión de taller digital\nEvaluación: 25% por módulo.",
     "celular": "💻 IA aplicada a Reparación de Computadoras y Celulares:\n• Módulo 1: Diagnóstico de hardware con IA\n• Módulo 2: Software de recuperación y flash\n• Módulo 3: Reparación de placas y componentes\n• Módulo 4: Gestión de taller digital\nEvaluación: 25% por módulo.",
-    "reparación": "💻 IA aplicada a Reparación de Computadoras y Celulares:\n• Módulo 1: Diagnóstico de hardware con IA\n• Módulo 2: Software de recuperación y flash\n• Módulo 3: Reparación de placas y componentes\n• Módulo 4: Gestión de taller digital\nEvaluación: 25% por módulo.",
-    "seguridad": "🛡️ Seguridad Industrial con Monitoreo Inteligente:\n• Módulo 1: Normas y protocolos\n• Módulo 2: Cámaras con detección IA (caídas, EPP)\n• Módulo 3: Alertas en tiempo real\n• Módulo 4: Simulacro con IA\nEvaluación: 25% por módulo.",
-    "industrial": "🛡️ Seguridad Industrial con Monitoreo Inteligente:\n• Módulo 1: Normas y protocolos\n• Módulo 2: Cámaras con detección IA (caídas, EPP)\n• Módulo 3: Alertas en tiempo real\n• Módulo 4: Simulacro con IA\nEvaluación: 25% por módulo.",
     "marketing": "📣 Marketing Digital con IA:\n• Módulo 1: Estrategia y buyer persona\n• Módulo 2: Creación de contenido con IA\n• Módulo 3: Campañas automatizadas\n• Módulo 4: Análisis y optimización IA\nEvaluación: 25% por módulo.",
-    "digital": "📣 Marketing Digital con IA:\n• Módulo 1: Estrategia y buyer persona\n• Módulo 2: Creación de contenido con IA\n• Módulo 3: Campañas automatizadas\n• Módulo 4: Análisis y optimización IA\nEvaluación: 25% por módulo.",
     "chatbot": "💬 Chatbots con IA para Atención al Cliente:\n• Módulo 1: Diseño de flujos conversacionales\n• Módulo 2: Integración con WhatsApp y web\n• Módulo 3: Entrenamiento con historial real\n• Módulo 4: Implementación y métricas\nEvaluación: 25% por módulo.",
-    "recursos humanos": "👥 IA en Recursos Humanos:\n• Módulo 1: Reclutamiento con IA\n• Módulo 2: Onboarding digital\n• Módulo 3: Evaluación del desempeño predictiva\n• Módulo 4: Retención con análisis de clima\nEvaluación: 25% por módulo.",
-    "rrhh": "👥 IA en Recursos Humanos:\n• Módulo 1: Reclutamiento con IA\n• Módulo 2: Onboarding digital\n• Módulo 3: Evaluación del desempeño predictiva\n• Módulo 4: Retención con análisis de clima\nEvaluación: 25% por módulo.",
     "excel": "📊 Análisis de Datos con IA en Excel:\n• Módulo 1: Fórmulas y tablas dinámicas\n• Módulo 2: Power Query + IA\n• Módulo 3: Visualización inteligente\n• Módulo 4: Caso: análisis financiero\nEvaluación: 25% por módulo.",
     "datos": "📊 Análisis de Datos con IA en Excel:\n• Módulo 1: Fórmulas y tablas dinámicas\n• Módulo 2: Power Query + IA\n• Módulo 3: Visualización inteligente\n• Módulo 4: Caso: análisis financiero\nEvaluación: 25% por módulo.",
     "idioma": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo.",
-    "inglés": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo.",
-    "logística": "📦 IA en Logística y Gestión Aduanera:\n• Módulo 1: Rutas inteligentes\n• Módulo 2: Documentación automatizada\n• Módulo 3: Predicción de retrasos\n• Módulo 4: Caso: importación/exportación\nEvaluación: 25% por módulo.",
-    "aduanera": "📦 IA en Logística y Gestión Aduanera:\n• Módulo 1: Rutas inteligentes\n• Módulo 2: Documentación automatizada\n• Módulo 3: Predicción de retrasos\n• Módulo 4: Caso: importación/exportación\nEvaluación: 25% por módulo.",
-    "computación": "🖥️ Computación con Herramientas IA:\n• Módulo 1: Ofimática inteligente\n• Módulo 2: Automatización de tareas\n• Módulo 3: Ciberseguridad básica con IA\n• Módulo 4: Proyecto: oficina digital\nEvaluación: 25% por módulo.",
-    "peluquería": "💇‍♀️ Diseño Asistido con IA en Peluquería y Maquillaje:\n• Módulo 1: Análisis de rostro con IA\n• Módulo 2: Pruebas virtuales de color y corte\n• Módulo 3: Técnicas profesionales\n• Módulo 4: Portafolio digital\nEvaluación: 25% por módulo.",
-    "maquillaje": "💄 Diseño Asistido con IA en Peluquería y Maquillaje:\n• Módulo 1: Análisis de rostro con IA\n• Módulo 2: Pruebas virtuales de color y corte\n• Módulo 3: Técnicas profesionales\n• Módulo 4: Portafolio digital\nEvaluación: 25% por módulo.",
+    "ingles": "🌍 Enseñanza de Idiomas con IA:\n• Módulo 1: Pronunciación y gramática con IA\n• Módulo 2: Conversación simulada\n• Módulo 3: Comprensión auditiva\n• Módulo 4: Certificación práctica\nEvaluación: 25% por módulo.",
+    "peluqueria": "💇‍♀️ Diseño Asistido con IA en Peluquería y Maquillaje:\n• Módulo 1: Análisis de rostro con IA\n• Módulo 2: Pruebas virtuales de color y corte\n• Módulo 3: Técnicas profesionales\n• Módulo 4: Portafolio digital\nEvaluación: 25% por módulo.",
     "moda": "👗 Moda y Corte con IA:\n• Módulo 1: Medidas y patronaje digital\n• Módulo 2: Diseño asistido por IA\n• Módulo 3: Tendencias predictivas\n• Módulo 4: Colección virtual\nEvaluación: 25% por módulo.",
-    "corte": "👗 Moda y Corte con IA:\n• Módulo 1: Medidas y patronaje digital\n• Módulo 2: Diseño asistido por IA\n• Módulo 3: Tendencias predictivas\n• Módulo 4: Colección virtual\nEvaluación: 25% por módulo.",
-    "confección": "👗 Moda y Corte con IA:\n• Módulo 1: Medidas y patronaje digital\n• Módulo 2: Diseño asistido por IA\n• Módulo 3: Tendencias predictivas\n• Módulo 4: Colección virtual\nEvaluación: 25% por módulo.",
-    "ajedrez": "♟️ Ajedrez con Entrenamiento basado en IA:\n• Módulo 1: Aperturas y tácticas\n• Módulo 2: Análisis con motores IA\n• Módulo 3: Estrategia de medio juego\n• Módulo 4: Torneo virtual\nEvaluación: 25% por módulo.",
-    "manualidades": "🎨 Manualidades y Creatividad Digital con IA:\n• Módulo 1: Generación de ideas con IA\n• Módulo 2: Diseño de productos artesanales\n• Módulo 3: Impresión 3D y digital\n• Módulo 4: Tienda online con IA\nEvaluación: 25% por módulo.",
-    "creatividad": "🎨 Manualidades y Creatividad Digital con IA:\n• Módulo 1: Generación de ideas con IA\n• Módulo 2: Diseño de productos artesanales\n• Módulo 3: Impresión 3D y digital\n• Módulo 4: Tienda online con IA\nEvaluación: 25% por módulo."
+    "ajedrez": "♟️ Ajedrez con Entrenamiento basado en IA:\n• Módulo 1: Aperturas y tácticas\n• Módulo 2: Análisis con motores IA\n• Módulo 3: Estrategia de medio juego\n• Módulo 4: Torneo virtual\nEvaluación: 25% por módulo."
   };
 
   function findCourseInMessage(text) {
-    const lower = text.toLowerCase();
-    
+    const lower = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     for (const [key, value] of Object.entries(syllabi)) {
-      if (lower.includes(key)) return value;
+      const keyNoAccent = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (lower.includes(keyNoAccent)) return value;
     }
     return null;
   }
 
-  // === FUNCIÓN PRINCIPAL DEL CHATBOT ===
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   async function callGroq() {
     const input = document.getElementById('chat-input');
     const logs = document.getElementById('chat-messages');
@@ -330,12 +291,10 @@
     
     if (!txt) return;
 
-    // Mostrar mensaje del usuario
     logs.innerHTML += `<div style="text-align:right; color:#ffe082; margin-top:10px;"><b>Tú:</b> ${escapeHtml(txt)}</div>`;
     input.value = "";
     logs.scrollTop = logs.scrollHeight;
 
-    // Buscar en base de conocimiento local primero
     const courseInfo = findCourseInMessage(txt);
     if (courseInfo) {
       const reply = `📚 ${courseInfo}\n\n✨ Inversión: solo <b>20 $ o 25 €</b> por curso completo con certificado.\n📱 ¿Reservamos tu cupo? Escríbenos al WhatsApp: <b>+58 422 4006612</b>.`;
@@ -344,20 +303,16 @@
       return;
     }
 
-    // Mostrar indicador de carga
     logs.innerHTML += `<div id="loading-msg" style="margin-top:10px; color:#999;"><i>Pensando...</i></div>`;
     logs.scrollTop = logs.scrollHeight;
 
     try {
-      // Llamada al proxy de Groq
       const res = await fetch(GROQ_PROXY_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: txt })
       });
 
-      // Eliminar indicador de carga
       const loadingMsg = document.getElementById('loading-msg');
       if (loadingMsg) loadingMsg.remove();
 
@@ -380,13 +335,6 @@
     }
   }
 
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  // Enviar mensaje al presionar Enter
   document.getElementById('chat-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
